@@ -14,9 +14,10 @@ import { NewsModule } from './modules/news/news.module';
 import { ListingCategoryModule } from './modules/categoryListing/categoryListing.module';
 import { DistrictModule } from './modules/district/district.module';
 import { WardModule } from './modules/ward/ward.module';
+import { DirectionModule } from './modules/direction/direction.module';
 
 @Module({
-  imports: [UserModule, CategoryNewsModule,ListingCategoryModule ,WardModule,DistrictModule, NewsModule, TypeListingModule, ListingModule,AuthModule,TypeListingModule , RegionModule ,CustomConfigModule, TypeOrmModule.forRoot(AppDataSource.options)],
+  imports: [UserModule, CategoryNewsModule,DirectionModule,ListingCategoryModule ,WardModule,DistrictModule, NewsModule, TypeListingModule, ListingModule,AuthModule,TypeListingModule , RegionModule ,CustomConfigModule, TypeOrmModule.forRoot(AppDataSource.options)],
   controllers: [AppController],
   providers: [AppService], 
 })

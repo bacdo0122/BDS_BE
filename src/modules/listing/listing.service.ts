@@ -44,7 +44,7 @@ export class ListingService{
         order: {id: "ASC"},
         take: limit,
         skip: (page - 1) * limit,
-        relations: ['user', 'category', 'type','region', 'region.ward', 'region.ward.district']
+        relations: ['user', 'category', 'type','region', 'region.ward', 'region.ward.district', 'direction']
       });
 
       return {
@@ -62,7 +62,7 @@ export class ListingService{
     async create(payload: CreateListingDto){
         const {
            userId, price, status, category_id, type_id, regionId, title, description, address, area, legal_status,
-           bedrooms, bathrooms, furnishing, orientation, image
+           bedrooms, bathrooms, furnishing, orientation, image, pricePerArea, direction_id
           } = payload;
           const checkExsi  = await this.ListingRepository.find({where: {title}});
           if(checkExsi.length){
@@ -71,7 +71,7 @@ export class ListingService{
 
             let newListing = this.ListingRepository.create({
               status, regionId, title, description, address, area, legal_status,
-              bedrooms, bathrooms, furnishing, orientation,userId,price, category_id, type_id,image
+              bedrooms, bathrooms, furnishing, orientation,userId,price, category_id, type_id,image,  pricePerArea, direction_id
             });
             return await this.ListingRepository.save(newListing);
           }
@@ -80,11 +80,11 @@ export class ListingService{
     async edit(payload: EditListingDto){
         const {
             id, price,  category_id, type_id ,status, regionId, title, description, address, area, legal_status,
-            bedrooms, bathrooms, furnishing, orientation,userId, image
+            bedrooms, bathrooms, furnishing, orientation,userId, image,  pricePerArea, direction_id
            } = payload;
         const filmData = { 
             userId,  status, regionId, title, description, address, area, legal_status,
-            bedrooms, bathrooms, furnishing, orientation, price,  category_id, type_id, image
+            bedrooms, bathrooms, furnishing, orientation, price,  category_id, type_id, image,  pricePerArea, direction_id
           };
       
           const instance = await this.ListingRepository.findBy({ id: id });

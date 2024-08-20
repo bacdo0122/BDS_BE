@@ -28,6 +28,16 @@ export class EditListingDto    {
   @IsNotEmpty()
   category_id: number;
 
+
+  @ApiProperty()
+  @IsNumber()
+  @IsNotEmpty()
+  direction_id: number;
+
+  @ApiProperty()
+  @IsNumber()
+  pricePerArea: number;
+
   @ApiProperty()
   @IsString()
   @IsNotEmpty()

@@ -24,6 +24,15 @@ export class CreateListingDto  {
   category_id: number;
 
   @ApiProperty()
+  @IsNumber()
+  @IsNotEmpty()
+  direction_id: number;
+
+  @ApiProperty()
+  @IsNumber()
+  pricePerArea: number;
+
+  @ApiProperty()
   @IsString()
   @IsNotEmpty()
   title: string;
@@ -72,7 +81,6 @@ export class CreateListingDto  {
   @ApiProperty()
   @IsNumber()
   price: number;
-
 
   @ApiProperty()
   @IsString()

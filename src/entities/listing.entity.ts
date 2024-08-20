@@ -4,6 +4,7 @@ import ListingCategoryEntity from "./listingCategory.entity";
 import TypeListingEntity from "./listingType.entity";
 import RegionEntity from "./region.entity";
 import { status_bds } from "../enum/enum_common";
+import DirectionEntity from "./direction.entity";
 
 @Entity({ name: 'listing' })
 export default class ListingEntity {
@@ -100,6 +101,16 @@ export default class ListingEntity {
   })
   expiration_date: Date
 
+  @Column({
+    type: 'int'
+  })
+  direction_id: number;
+
+  @ManyToOne(() => DirectionEntity, direction => direction.listings)
+  @JoinColumn({
+    name: 'direction_id'
+  })
+  direction: DirectionEntity;
 
   @Column({
     type: 'int'
@@ -116,6 +127,12 @@ export default class ListingEntity {
     type: 'int'
   })
   type_id: number;
+
+  @Column({
+    type: 'decimal',
+    default: 0
+  })
+  pricePerArea: number;
 
   @ManyToOne(() => TypeListingEntity, type => type.listings)
   @JoinColumn({
