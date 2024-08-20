@@ -20,7 +20,7 @@ export class ListingService{
     private listingCategoryService: ListingCategoryService,
     ){}
 
-    async find({search, page, limit,  userId, price, status, regionId, title, description, address, area, legal_status,
+    async find({search, page, limit,  userId, price, status, regionId, title, description, address, area, legal_status, type_id,
       bedrooms, bathrooms, furnishing, orientation} : GetListingDto){
         let searchOption = [];
      if(search){
@@ -36,6 +36,9 @@ export class ListingService{
     if(status){
         andOption.status = status;
     }
+    if(type_id){
+      andOption.type_id = type_id;
+  }
     if (Object.keys(andOption).length > 0) {
         searchOption.push(andOption);
       }

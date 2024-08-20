@@ -19,12 +19,12 @@ export class GetListingDto extends SearchDto  {
   @IsNotEmpty()
   category_id: number;
 
-  @ApiProperty()
+  @ApiPropertyOptional()
   @IsNumber()
   @IsNotEmpty()
   direction_id: number;
 
-  @ApiProperty()
+  @ApiPropertyOptional()
   @IsNumber()
   pricePerArea: number;
 
