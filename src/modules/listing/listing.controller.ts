@@ -7,6 +7,7 @@ import { ListingService } from "./listing.service";
 import { EditListingDto } from "./dtos/editListing.dto";
 import { DeleteListingDto } from "./dtos/deleteListing.dto";
 import { GetOneListingDto } from "./dtos/getOneListing.dto";
+import { ConfirmListingDto } from "./dtos/confirmListing.dto";
 
 @ApiTags("Listings")
 @Controller("/listing")
@@ -41,6 +42,13 @@ export class ListingController{
     // @UseGuards(AuthGuard("jwt"))
     async edit(@Body() payload: EditListingDto){
         return this.listingService.edit(payload);
+    }
+
+    @Post("/confirm")
+    // @ApiBearerAuth()
+    // @UseGuards(AuthGuard("jwt"))
+    async confirm(@Body() payload: ConfirmListingDto){
+        return this.listingService.confirm(payload);
     }
 
     @Post("/delete")

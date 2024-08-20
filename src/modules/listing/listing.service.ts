@@ -10,6 +10,7 @@ import { ListingCategoryService } from "../categoryListing/categoryListing.servi
 import { EditListingDto } from "./dtos/editListing.dto";
 import { DeleteListingDto } from "./dtos/deleteListing.dto";
 import { GetOneListingDto } from "./dtos/getOneListing.dto";
+import { ConfirmListingDto } from "./dtos/confirmListing.dto";
 
 @Injectable()
 export class ListingService{
@@ -94,6 +95,19 @@ export class ListingService{
           Object.assign(instance[0], filmData);
           return await this.ListingRepository.save(instance[0]);
     }
+
+    async confirm(payload: ConfirmListingDto){
+      const {
+        status,id
+       } = payload;
+    const filmData = { 
+      status,id
+      };
+  
+      const instance = await this.ListingRepository.findBy({ id: id });
+      Object.assign(instance[0], filmData); 
+      return await this.ListingRepository.save(instance[0]);
+    } 
 
     async delete(payload: DeleteListingDto) {
         const instance = await this.ListingRepository.findBy({ id: payload.id });

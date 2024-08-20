@@ -43,15 +43,16 @@ export class UserService {
     }
   }
   async edit(payload: EditUserDto) {
-    const { name, email, password } = payload;
+    const { name, email, password, role } = payload;
     const checkUser = await this.userRepository.findBy({ email: email });
-    const newUser = this.userRepository.create({
+    const newUser = {
       name: name,
       email: email,
       password: password,
-    });
+      role: role
+    };
     Object.assign(checkUser[0], newUser);
-    return await this.userRepository.save(checkUser[0]);
+    return await this.userRepository.save(checkUser[0]); 
   }
 
   async delete(payload: DeleteUserDto) {
