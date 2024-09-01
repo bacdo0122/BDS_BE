@@ -5,6 +5,7 @@ import { GetNewsDto } from "./dtos/getNews.dto";
 import { CreateNewsDto } from "./dtos/createNews.dto";
 import { NewsService } from "./news.service";
 import { EditNewsDto } from "./dtos/editNews.dto";
+import { GetNewsOneDto } from "./dtos/getOne.dto";
 
 @ApiTags("News")
 @Controller("/news")
@@ -18,6 +19,13 @@ export class NewsController{
     // @UseGuards(AuthGuard("jwt"))
     async find(@Query() query: GetNewsDto){
         return await this.newsService.find(query)
+    }
+
+    @Get("/getOne")
+    // @ApiBearerAuth()
+    // @UseGuards(AuthGuard("jwt"))
+    async findOne(@Query() query: GetNewsOneDto){
+        return await this.newsService.findOne(query)
     }
 
     @Post("/create")

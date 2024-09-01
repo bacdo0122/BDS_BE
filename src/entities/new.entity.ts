@@ -13,6 +13,11 @@ export default class NewsEntity {
   title: string;
 
   @Column({
+    type: 'varchar'
+  })
+  image: string;
+
+  @Column({
     type: 'text'
   })
   content: string;

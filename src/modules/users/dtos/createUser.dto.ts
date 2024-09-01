@@ -21,6 +21,10 @@ export class CreateUserDto  {
   password: string; 
 
   @ApiProperty()
+  @IsString()
+  phone_number: string;
+
+  @ApiProperty()
   @IsNotEmpty()
   @IsEnum(role_user)
   role: role_user;

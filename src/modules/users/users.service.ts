@@ -25,7 +25,7 @@ export class UserService {
     return user;
   }
   async create(payload: CreateUserDto) {
-    const { name, email, password, role } = payload;
+    const { name, email, password, role, phone_number } = payload;
     const checkUserExisted = await this.getOneUserByEmail(payload.email);
     if (checkUserExisted.data) {
       throw new checkUserExistedExpection();
@@ -35,6 +35,7 @@ export class UserService {
         email: email,
         password: password,
         role: role,
+        phone_number,
         avatar: 'https://static.netpop.app/img/avatar-logout.png',
       });
       return this.userRepository.save(newUser, {
@@ -43,13 +44,14 @@ export class UserService {
     }
   }
   async edit(payload: EditUserDto) {
-    const { name, email, password, role } = payload;
+    const { name, email, password, role, phone_number } = payload;
     const checkUser = await this.userRepository.findBy({ email: email });
     const newUser = {
       name: name,
       email: email,
       password: password,
-      role: role
+      role: role,
+      phone_number
     };
     Object.assign(checkUser[0], newUser);
     return await this.userRepository.save(checkUser[0]); 
@@ -60,11 +62,11 @@ export class UserService {
   }
 
   async findUser({ search, limit = 10, page = 1 }: SearchDto) {
-    let searchOption: any = {};
+    let searchOption: any = {role: 'user'};
     if (search) {
       searchOption = [
-        { name: Like(`%${search.trim()}%`) },
-        { email: Like(`%${search.trim()}%`) },
+        { name: Like(`%${search.trim()}%`), role: 'user' },
+        { email: Like(`%${search.trim()}%`), role: 'user' },
       ];
     }
 

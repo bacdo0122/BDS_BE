@@ -7,6 +7,7 @@ import { GetNewsDto } from "./dtos/getNews.dto";
 import { CreateNewsDto } from "./dtos/createNews.dto";
 import NewsEntity from "../../entities/new.entity";
 import { EditNewsDto } from "./dtos/editNews.dto";
+import { GetNewsOneDto } from "./dtos/getOne.dto";
 
 @Injectable()
 export class NewsService{
@@ -15,7 +16,7 @@ export class NewsService{
     private NewsRepository: Repository<NewsEntity>,
     ){}
 
-    async find({search, page, limit, title, content} : GetNewsDto){
+    async find({search, page, limit, title, content, category} : GetNewsDto){
         let searchOption = [];
      if(search){
         searchOption = [{ title: Like(`%${search.trim()}%`) }];
@@ -23,6 +24,9 @@ export class NewsService{
      let andOption: any = {};
     if (title) {
         andOption.title = Like(`%${title.trim()}%`);
+    }
+    if(category){
+      andOption.category_id = category;
     }
     if (Object.keys(andOption).length > 0) {
         searchOption.push(andOption);
@@ -43,9 +47,19 @@ export class NewsService{
       };
     }
 
+    async findOne({id}: GetNewsOneDto) {
+      // Đảm bảo truyền đúng kiểu FindOptionsWhere hoặc FindOptionsWhere[]
+      const news = await this.NewsRepository.findOne({
+        where: {id},  // Ví dụ tìm kiếm theo id
+        relations: [ 'category']
+      });
+      
+      return news;
+    }
+
     async create(payload: CreateNewsDto){
         const {
-           title, content, userId, category_id
+           title, content, userId, category_id, image
           } = payload;
           const checkExistNews = await this.NewsRepository.findOne({where: {title, userId}})
           if(checkExistNews){
@@ -53,7 +67,7 @@ export class NewsService{
           }
         else{
             const newNews = this.NewsRepository.create({
-                title, content, userId, category_id
+                title, content, userId, category_id, image
             }) 
             this.NewsRepository.save(newNews, {
                 reload: false,
@@ -61,9 +75,9 @@ export class NewsService{
         }
     }
 
-    async edit({id, title, content, userId, category_id}: EditNewsDto){
+    async edit({id, title, content, userId, category_id, image}: EditNewsDto){
       const BDSData = {
-        id, title, content, userId, category_id
+        id, title, content, userId, category_id, image
       };
       const instance = await this.NewsRepository.findBy({ id: id });
       if(instance){ 

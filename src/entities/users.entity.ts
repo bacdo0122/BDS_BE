@@ -30,8 +30,13 @@ export default class UserEntity {
   @Column({ select: false, nullable: true })
   password: string;
 
-  @Column({nullable: true})
+  @Column({nullable: true, default: "https://static.netpop.app/img/avatar-logout.png"})
   avatar: string;
+
+  @Column({
+    type: 'varchar'
+  })
+  phone_number: string;
 
   @OneToMany(() => ListingEntity, listing => listing.user)
   listing: ListingEntity[]

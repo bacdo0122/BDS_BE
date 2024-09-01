@@ -22,6 +22,10 @@ export class EditUserDto  {
 
     @ApiProperty()
     @IsString()
+    phone_number: string;
+
+    @ApiProperty()
+    @IsString()
     @IsNotEmpty()
     role: role_user; 
 }

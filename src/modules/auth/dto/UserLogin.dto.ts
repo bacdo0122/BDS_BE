@@ -11,4 +11,5 @@ export class UserLoginReqDto {
   @IsString()
   @IsNotEmpty()
   password: string;
+
 }

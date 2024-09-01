@@ -20,11 +20,13 @@ export class AuthService {
         accessToken: this.jwtService.sign({
           email,
           id: res.id,
+          role: res.role
         }),
         refreshToken: this.jwtService.sign(
           {
             email,
             id: res.id,
+            role: res.role
           },
           {
             expiresIn: '7d',

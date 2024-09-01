@@ -19,6 +19,10 @@ export class EditNewsDto  {
   userId: number;
 
   @ApiProperty()
+  @IsString()
+  image: string;
+
+  @ApiProperty()
   @IsNumber()
   category_id: number;
 }
