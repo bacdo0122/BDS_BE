@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { LessThan, Like, Repository } from "typeorm";
 import { Exsisted } from "../../expections/Exsited.expection";
-import { GetListingDto } from "./dtos/getRegion.dto";
+import { GetListingDto } from "./dtos/getListing.dto";
 import { CreateListingDto } from "./dtos/createRegion.dto";
 import ListingEntity from "../../entities/listing.entity";
 import { TypeListingService } from "../typeListing/typeListing.service";

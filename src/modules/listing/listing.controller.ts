@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Post, Put, Query, UseGuards } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
 import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
-import { GetListingDto } from "./dtos/getRegion.dto";
+import { GetListingDto } from "./dtos/getListing.dto";
 import { CreateListingDto } from "./dtos/createRegion.dto";
 import { ListingService } from "./listing.service";
 import { EditListingDto } from "./dtos/editListing.dto";
